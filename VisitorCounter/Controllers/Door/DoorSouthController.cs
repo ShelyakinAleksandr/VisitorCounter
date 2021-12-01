@@ -15,12 +15,18 @@ namespace VisitorCounter.Controllers.Door
     public class DoorSouthController : ControllerBase
     {
         Visitor visitor = new Visitor();
+        AppDb Db { get; }
+
+        public DoorSouthController(AppDb db)
+        {
+            Db = db;
+        }
 
         [HttpGet("SouthEntrance")]
-        public async Task<NumberVisitors> SouthEntrance() => visitor.VisitorEntrance(ref Variables.visitorCounter);
+        public async Task<NumberVisitors> SouthEntrance() => visitor.VisitorEntranceOutput(Db, 0);
 
         [HttpGet("SouthOutput")]
-        public async Task<NumberVisitors> SouthOutput() => visitor.VisitorOutput(ref Variables.visitorCounter);
-       
+        public async Task<NumberVisitors> SouthOutput() => visitor.VisitorEntranceOutput(Db, 1);
+
     }
 }

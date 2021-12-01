@@ -2,20 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VisitorCounter.SqlRequest;
+using VisitorCounter.Models;
+using System.Data;
 
 namespace VisitorCounter.Infrastructure
 {
     public class Visitor
     {
-        public NumberVisitors VisitorEntrance(ref int visitorCounter) => new NumberVisitors(++visitorCounter);
-
-        public NumberVisitors VisitorOutput(ref int visitorCounter)
+        public NumberVisitors VisitorEntranceOutput(AppDb Db, int operation)
         {
-            if (visitorCounter > 0)
-                return new NumberVisitors(--visitorCounter);
-            else
-                return new NumberVisitors(visitorCounter);
+            SqlQuery quevy = new SqlQuery(Db);
+            return new NumberVisitors( quevy.CountVisitor(operation));
         }
+
+        public DateVisitors StatisticVisitor(AppDb Db, DateTime dateStart, DateTime? dateEnd)
+        {
+
+            DateVisitors dateVisitors = new DateVisitors();
+
+            SqlQuery quevy = new SqlQuery(Db);
+
+            quevy.StatisticVisitor(dateStart, dateEnd);
+
+            return dateVisitors;
+        }
+
+       
            
     }
 }

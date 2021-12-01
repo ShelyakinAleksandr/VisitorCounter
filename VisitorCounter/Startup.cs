@@ -7,9 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
+using VisitorCounter.Infrastructure;
 
 namespace VisitorCounter
 {
@@ -37,13 +37,11 @@ namespace VisitorCounter
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "VisitorCounter", Version = "v1" });
             });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
@@ -67,6 +65,7 @@ namespace VisitorCounter
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}"); // подключаем маршрутизацию на контроллеры
             });
+
 
         }
     }

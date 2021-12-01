@@ -14,13 +14,20 @@ namespace VisitorCounter.Controllers.Door
     [ApiController]
     public class DoorNorthController : ControllerBase
     {
+
         Visitor visitor = new Visitor();
+        AppDb Db { get; }
+
+        public DoorNorthController(AppDb db)
+        {
+            Db = db;
+        }
 
         [HttpGet("NorthEntrance")]
-        public async Task<NumberVisitors> NorthEntrance() => visitor.VisitorEntrance(ref Variables.visitorCounter);
+        public async Task<NumberVisitors> NorthEntrance() => visitor.VisitorEntranceOutput(Db, 0);
 
         [HttpGet("NorthOutput")]
-        public async Task<NumberVisitors> NorthOutput() => visitor.VisitorOutput(ref Variables.visitorCounter);
+        public async Task<NumberVisitors> NorthOutput() => visitor.VisitorEntranceOutput(Db, 1);
 
     }
 }

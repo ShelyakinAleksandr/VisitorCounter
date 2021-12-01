@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace VisitorCounter.Models
 {
     public class DateVisitors
     {
         public string date { get; set; }
-        public List<CountVisitor> visitors { get; set; }
+        public Dictionary<string,int> visitors { get; set; }
+
     }
 
-    public class CountVisitor
-    {
-        public DateTime time { get; set; }
-        public int visitors { get; set; }
-    }
+    
 }

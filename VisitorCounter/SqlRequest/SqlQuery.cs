@@ -49,7 +49,10 @@ namespace VisitorCounter.SqlRequest
             MySqlCommand cmd = new MySqlCommand(sqlQuesry, Db.Connection);
 
             cmd.Parameters.Add(new MySqlParameter { ParameterName = "@DateStart", DbType = DbType.Date, Value = DateStart });
-            cmd.Parameters.Add(new MySqlParameter { ParameterName = "@DateEnd", DbType = DbType.Date, Value = DateEnd });
+            if(DateEnd != new DateTime(1,1,1,0,0,0))
+                cmd.Parameters.Add(new MySqlParameter { ParameterName = "@DateEnd", DbType = DbType.Date, Value = DateEnd });
+            else
+                cmd.Parameters.Add(new MySqlParameter { ParameterName = "@DateEnd", DbType = DbType.Date, Value = DBNull.Value });
 
             Db.Connection.Open();
 

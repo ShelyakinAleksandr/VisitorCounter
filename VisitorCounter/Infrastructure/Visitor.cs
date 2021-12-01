@@ -13,6 +13,7 @@ namespace VisitorCounter.Infrastructure
         public NumberVisitors VisitorEntranceOutput(AppDb Db, int operation)
         {
             SqlQuery quevy = new SqlQuery(Db);
+
             return new NumberVisitors( quevy.CountVisitor(operation));
         }
 

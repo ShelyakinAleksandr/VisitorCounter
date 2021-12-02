@@ -10,11 +10,13 @@ namespace VisitorCounter.Infrastructure
 {
     public class Visitor
     {
-        public NumberVisitors VisitorEntranceOutput(AppDb Db, int operation)
+        public async Task<NumberVisitors> VisitorEntranceOutput(AppDb Db, int operation)
         {
             SqlQuery quevy = new SqlQuery(Db);
 
-            return new NumberVisitors( quevy.CountVisitor(operation));
+            int numberVisitors =  await quevy.CountVisitor(operation);
+
+            return new NumberVisitors(numberVisitors);
         }
 
         public DateVisitors StatisticVisitor(AppDb Db, DateTime dateStart, DateTime? dateEnd)

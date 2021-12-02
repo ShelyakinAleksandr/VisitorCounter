@@ -29,7 +29,7 @@ namespace VisitorCounter.Controllers
             List<DateVisitors> listVisitors = new List<DateVisitors>();
            
             SqlQuery sqlQuery = new SqlQuery(Db);
-            DataTable dataTable = sqlQuery.StatisticVisitor(requestDate.DateStart, requestDate.DateEnd);
+            DataTable dataTable = await sqlQuery.StatisticVisitor(requestDate.DateStart, requestDate.DateEnd);
 
             //получаем список дат
             List<object> listDate = dataTable

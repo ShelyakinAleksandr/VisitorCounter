@@ -4,6 +4,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -65,7 +66,6 @@ namespace VisitorCounter
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}"); // подключаем маршрутизацию на контроллеры
             });
-
 
         }
     }

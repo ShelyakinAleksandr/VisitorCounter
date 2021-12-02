@@ -17,7 +17,7 @@ namespace VisitorCounter.SqlRequest
             Db = db;
         }
 
-        public int CountVisitor(int parametr)
+        public async Task<int> CountVisitor(int parametr)
         {
             string sqlQuesry = @"call VisitorCounters(@parametr)";
 
@@ -27,7 +27,7 @@ namespace VisitorCounter.SqlRequest
 
             int ansver = 0;
 
-            Db.Connection.Open();
+            await Db.Connection.OpenAsync();
             
             DbDataReader reader = cmd.ExecuteReader();
                 
@@ -36,11 +36,11 @@ namespace VisitorCounter.SqlRequest
                 ansver = reader.GetInt32(0);
             }
 
-            Db.Connection.Close();
+            await Db.Connection.CloseAsync();
             return ansver;
         }
 
-        public DataTable StatisticVisitor(DateTime DateStart, DateTime? DateEnd)
+        public async Task<DataTable> StatisticVisitor(DateTime DateStart, DateTime? DateEnd)
         {
             DataTable table = new DataTable();
 
@@ -54,12 +54,12 @@ namespace VisitorCounter.SqlRequest
             else
                 cmd.Parameters.Add(new MySqlParameter { ParameterName = "@DateEnd", DbType = DbType.Date, Value = DBNull.Value });
 
-            Db.Connection.Open();
+            await Db.Connection.OpenAsync();
 
             MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
 
             adapter.Fill(table);
-            Db.Connection.Close();
+            await Db.Connection.CloseAsync();
 
             return table;
         }
